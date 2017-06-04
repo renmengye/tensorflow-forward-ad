@@ -19,14 +19,14 @@ include_dirs = [numpy.get_include()]
 if use_cython:
   ext_modules += [
       Extension(
-          "tensorflow_forward_ad/cbfs", ["tensorflow_forward_ad/cbfs.pyx"],
+          "tensorflow_forward_ad.cbfs", ["tensorflow_forward_ad/cbfs.pyx"],
           include_dirs=include_dirs),
   ]
   cmdclass.update({'build_ext': build_ext})
 else:
   ext_modules += [
       Extension(
-          "tensorflow_forward_ad/cbfs", ["tensorflow_forward_ad/cbfs.c"],
+          "tensorflow_forward_ad.cbfs", ["tensorflow_forward_ad/cbfs.c"],
           include_dirs=include_dirs),
   ]
 
@@ -35,7 +35,7 @@ setup(
     packages=['tensorflow_forward_ad'],
     cmdclass=cmdclass,
     ext_modules=ext_modules,
-    version='0.1',
+    version='0.2',
     description='TensorFlow forward-mode automatic differentiation',
     author='Mengye Ren',
     author_email='renmengye@gmail.com',
