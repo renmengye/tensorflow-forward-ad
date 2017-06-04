@@ -1,61 +1,12 @@
 import tensorflow as tf
 from tensorflow.python.framework import ops
-#from tensorflow.python.ops import array_ops
-#from tensorflow.python.ops import gen_nn_ops
-
-#@ops.RegisterGradient("MaxPoolWithArgmax")
-#def _MaxPoolGradWithArgmax(op, grad, unused_argmax_grad):
-#  """The gradients for `MaxPoolWithArgmax`.
-#    Args:
-#      op: The `MaxPoolWithArgmax` `Operation` that we are differentiating, which we can use
-#        to find the inputs and outputs of the original op.
-#      grad: Gradient with respect to the output of the `MaxPoolWithArgmax` op.
-#      op.inputs[0]: x
-#      op.outputs[0]: y
-#      op.outputs[1]: argmax_in_x
-#    Returns:
-#      Gradients with respect to the input of `MaxPoolWithArgmax`.
-#    """
-#
-#  return gen_nn_ops._max_pool_grad_with_argmax(
-#      op.inputs[0],
-#      grad,
-#      op.outputs[1],
-#      op.get_attr("ksize"),
-#      op.get_attr("strides"),
-#      padding=op.get_attr("padding"))
-
-#@ops.RegisterGradient("MaxPoolGradWithArgmax")
-#def _MaxPoolGradWithArgmaxGrad(op, grad):
-#  """The gradients for `MaxPoolGradWithArgmax`.
-#    Args:
-#      op: The `MaxPoolGradWithArgmax` `Operation` that we are differentiating, which we can use
-#        to find the inputs and outputs of the original op.
-#      grad: Gradient with respect to the output of the `MaxPoolGradWithArgmax` op.
-#      op.inputs[0]: x
-#      op.inputs[1]: dl/dy
-#      op.inputs[2]: argmax_in_x
-#      op.outputs[0]: dl/dx
-#    Returns:
-#      Gradients with respect to the input of `MaxPoolGradWithArgmax`.
-#  """
-#
-#  shape_x = array_ops.shape(op.inputs[0])
-#  shape_y = array_ops.shape(op.inputs[1])
-#
-#  grad_x = array_ops.zeros(shape_x, dtype=tf.float32)
-#  output_grad = tf.gather(tf.reshape(grad, [-1]), op.inputs[2])
-#  output_grad = tf.reshape(output_grad, shape_y)
-#
-#  return [grad_x, output_grad, None]
-
 
 @ops.RegisterGradient("MaxPoolGrad")
 def _MaxPoolGradGrad(op, grad):
   """The gradients for `MaxPoolGrad`.
     Args:
-      op: The `MaxPoolGrad` `Operation` that we are differentiating, which we can use
-        to find the inputs and outputs of the original op.
+      op: The `MaxPoolGrad` `Operation` that we are differentiating, which we 
+        can use to find the inputs and outputs of the original op.
         op.inputs[0]: x
         op.inputs[1]: y
         op.inputs[2]: dl/dy
