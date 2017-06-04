@@ -17,7 +17,7 @@ def pyx_library(name, srcs):
       "cmdclass={\"build_ext\": build_ext}," +
       "ext_modules=[" +
       "Extension(" +
-      "\"" + basename +"\", sources=[\"" + ss + "\"], " +
+      "\"" + basename +"\", sources=[\"'$(SRCS)'\"], " +
       "include_dirs=[numpy.get_include()])" +
       "],);")
     cmd_setup.append(

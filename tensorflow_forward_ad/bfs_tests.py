@@ -7,7 +7,7 @@ Author: Mengye Ren (mren@cs.toronto.edu)
 import numpy as np
 import unittest
 # from bfs import bfs
-from cbfs import bfs
+from tensorflow_forward_ad.cbfs import bfs
 
 
 class BFSTests(unittest.TestCase):

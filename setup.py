@@ -18,12 +18,16 @@ include_dirs = [numpy.get_include()]
 
 if use_cython:
   ext_modules += [
-      Extension("cbfs", ["cbfs.pyx"], include_dirs=include_dirs),
+      Extension(
+          "tensorflow_forward_ad/cbfs", ["tensorflow_forward_ad/cbfs.pyx"],
+          include_dirs=include_dirs),
   ]
   cmdclass.update({'build_ext': build_ext})
 else:
   ext_modules += [
-      Extension("cbfs", ["cbfs.c"], include_dirs=include_dirs),
+      Extension(
+          "tensorflow_forward_ad/cbfs", ["tensorflow_forward_ad/cbfs.c"],
+          include_dirs=include_dirs),
   ]
 
 setup(
@@ -36,7 +40,7 @@ setup(
     author='Mengye Ren',
     author_email='renmengye@gmail.com',
     url='https://github.com/renmengye/tensorflow-forward-ad',
-    download_url='https://github.com/renmengye/tensorflow-forward-ad/archive/0.1.tar.gz',
+    download_url=
+    'https://github.com/renmengye/tensorflow-forward-ad/archive/0.1.tar.gz',
     keywords=['tensorflow', 'automatic', 'differentiation'],
-    classifiers=[],
-)
+    classifiers=[],)

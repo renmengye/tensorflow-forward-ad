@@ -1,6 +1,5 @@
-from __future__ import (absolute_import, division, print_function,
-                        unicode_literals)
-from cbfs import bfs
+from __future__ import (division, print_function, unicode_literals)
+from tensorflow_forward_ad.cbfs import bfs
 
 import logger
 import numpy as np

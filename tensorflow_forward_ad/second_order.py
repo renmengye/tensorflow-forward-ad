@@ -10,7 +10,7 @@ import logger
 
 import tensorflow as tf
 
-from fwgrad import forward_gradients
+from tensorflow_forward_ad.fwgrad import forward_gradients
 
 log = logger.get()
 

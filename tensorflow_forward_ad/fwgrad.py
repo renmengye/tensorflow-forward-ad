@@ -30,14 +30,13 @@ Example 4:
   # Grad is now a list: [dy1_dx, dy2_dx]
   grad = forward_gradients(y, x)
 """
-from __future__ import (absolute_import, division, print_function,
-                        unicode_literals)
+from __future__ import (division, print_function, unicode_literals)
 
 import numpy as np
 import tensorflow as tf
 
 from tensorflow.python.ops import gen_nn_ops
-from graph import get_path_cover_str_list_list
+from tensorflow_forward_ad.graph import get_path_cover_str_list_list
 
 import logger
 
