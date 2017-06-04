@@ -2,6 +2,11 @@
 Forward-mode Automatic Differentiation for TensorFlow
 
 # Installation
+## Prerequisites
+* tensorflow 0.12+
+* Cython
+* Python 2 or 3
+
 ## Using pip
 ```bash
 pip install tensorflow_forward_ad
