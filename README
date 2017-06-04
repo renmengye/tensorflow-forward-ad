@@ -3,8 +3,9 @@ Forward-mode Automatic Differentiation for TensorFlow
 
 # Installation
 ## Prerequisites
-* tensorflow 0.12+
+* tensorflow 0.12+ (compatible with 1.0+)
 * Cython
+* NumPy
 * Python 2 or 3
 
 ## Option 1: using pip
@@ -23,7 +24,7 @@ python setup.py install
 git clone https://github.com/renmengye/tensorflow-forward-ad.git
 cd tensorflow-forward-ad
 bazel build //tensorflow_forward_ad:all
-# Run all unit tests.
+# Run all unit tests (with tensorflow-gpu only).
 bazel test //tensorflow_forward_ad:all
 ```
 
