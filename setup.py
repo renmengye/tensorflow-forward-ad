@@ -35,12 +35,12 @@ setup(
     packages=['tensorflow_forward_ad'],
     cmdclass=cmdclass,
     ext_modules=ext_modules,
-    version='0.2',
+    version='0.3',
     description='TensorFlow forward-mode automatic differentiation',
     author='Mengye Ren',
     author_email='renmengye@gmail.com',
     url='https://github.com/renmengye/tensorflow-forward-ad',
     download_url=
-    'https://github.com/renmengye/tensorflow-forward-ad/archive/0.2.tar.gz',
+    'https://github.com/renmengye/tensorflow-forward-ad/archive/0.3.tar.gz',
     keywords=['tensorflow', 'automatic', 'differentiation'],
     classifiers=[],)
