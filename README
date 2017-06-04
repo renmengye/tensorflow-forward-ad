@@ -7,18 +7,18 @@ Forward-mode Automatic Differentiation for TensorFlow
 * Cython
 * Python 2 or 3
 
-## Using pip
+## Option 1: using pip
 ```bash
 pip install tensorflow_forward_ad
 ```
-## Build from source
+## Option 2: building from source
 ```bash
 git clone https://github.com/renmengye/tensorflow-forward-ad.git
 cd tensorflow-forward-ad
 python setup.py install
 ```
 
-## Build from source using Bazel
+## Option 3: building from source using Bazel
 ```bash
 git clone https://github.com/renmengye/tensorflow-forward-ad.git
 cd tensorflow-forward-ad
@@ -27,7 +27,7 @@ bazel build //tensorflow_forward_ad:all
 bazel test //tensorflow_forward_ad:all
 ```
 
-# Forward-mode AD Usage
+# Forward-Mode AD Usage
 ```python
 import tensorflow as tf
 from tensorflow_forward_ad import forward_gradients
@@ -57,7 +57,7 @@ v2 = tf.ones([10, 8]) * 2.0
 J1v, J2v = forward_gradients([y1, y2], [x1, x2], [v1, v2])
 ```
 
-# Second-order Matrix Vector Product
+# Second-Order Matrix Vector Product
 ```python
 import tensorflow as tf
 
