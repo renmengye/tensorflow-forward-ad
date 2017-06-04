@@ -1,6 +1,7 @@
 import tensorflow as tf
 from tensorflow.python.framework import ops
 
+
 @ops.RegisterGradient("MaxPoolGrad")
 def _MaxPoolGradGrad(op, grad):
   """The gradients for `MaxPoolGrad`.
