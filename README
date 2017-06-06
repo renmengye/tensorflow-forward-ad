@@ -84,8 +84,8 @@ Second-Order Matrix Vector Product
     w = tf.ones([10, 8])
     z = tf.square(tf.matmul(x, w))
     v = tf.ones_like(x)
-    y_ = tf.eye(8)
-    f = tf.nn.softmax_cross_entropy_with_logits(labels=y_, logits=z)
+    y_ = tf.range(5)
+    f = tf.nn.sparse_softmax_cross_entropy_with_logits(labels=y_, logits=z)
 
     # Hessian vector product
     from tensorflow_forward_ad.second_order import hessian_vec_fw
