@@ -78,6 +78,6 @@ from tensorflow_forward_ad.second_order import fisher_vec_fw
 Fv = fisher_vec_fw(f, x, v)
 
 # Gauss-Newton vector product
-from tensorflow_forward_ad.second_order import gauss_newton_vec_fw
+from tensorflow_forward_ad.second_order import gauss_newton_vec
 Gv = gauss_newton_vec(f, z, x, v)
 ```
