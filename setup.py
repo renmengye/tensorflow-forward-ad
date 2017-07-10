@@ -35,7 +35,7 @@ setup(
     packages=['tensorflow_forward_ad'],
     cmdclass=cmdclass,
     ext_modules=ext_modules,
-    version='0.3',
+    version='0.3.1',
     description='TensorFlow forward-mode automatic differentiation',
     author='Mengye Ren',
     author_email='renmengye@gmail.com',
