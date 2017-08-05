@@ -38,7 +38,7 @@ import tensorflow as tf
 from tensorflow.python.ops import gen_nn_ops
 from tensorflow_forward_ad.graph import get_path_cover_str_list_list
 
-import logger
+from . import logger
 
 log = logger.get()
 

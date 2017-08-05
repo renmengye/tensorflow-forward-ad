@@ -1,7 +1,7 @@
 from __future__ import (division, print_function, unicode_literals)
 from tensorflow_forward_ad.cbfs import bfs
 
-import logger
+from . import logger
 import numpy as np
 
 log = logger.get()
