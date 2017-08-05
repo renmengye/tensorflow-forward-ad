@@ -1,1 +1,1 @@
-from fwgrad import forward_gradients
+from .fwgrad import forward_gradients
