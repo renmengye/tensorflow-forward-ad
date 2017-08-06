@@ -1,1 +1,5 @@
+# Cython compiled files
 include tensorflow_forward_ad/cbfs.c
+
+# Misc
+include LICENSE
