@@ -1,8 +1,9 @@
 from __future__ import (division, print_function, unicode_literals)
-from tensorflow_forward_ad.cbfs import bfs
 
-import logger
 import numpy as np
+
+from tensorflow_forward_ad import logger
+from tensorflow_forward_ad.cbfs import bfs
 
 log = logger.get()
 

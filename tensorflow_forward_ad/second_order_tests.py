@@ -7,7 +7,7 @@ from __future__ import (division, print_function, unicode_literals)
 import numpy as np
 import tensorflow as tf
 
-import logger
+from tensorflow_forward_ad import logger
 from tensorflow_forward_ad.fwgrad import forward_gradients
 from tensorflow_forward_ad.second_order import (
     hessian_vec_fw, hessian_vec_bk, gauss_newton_vec, fisher_vec_fw,

@@ -4,10 +4,10 @@ Unit testing forward-mode automatic differentiation.
 
 from __future__ import (division, print_function, unicode_literals)
 
-import logger
 import numpy as np
 import tensorflow as tf
 
+from tensorflow_forward_ad import logger
 from tensorflow_forward_ad.fwgrad import forward_gradients
 
 log = logger.get()
@@ -113,7 +113,6 @@ class Conv2DBackpropInput_FwGradTests(BasicFwGradTests):
 class MaxPoolGrad_FwGradTests(BasicFwGradTests):
 
   def test_basic(self):
-    import maxpool_gradgrad
     with tf.Graph().as_default(), self.test_session() as sess:
       rnd = np.random.RandomState(0)
       x = self.get_random_tensor([2, 5, 5, 3], rnd=rnd)
@@ -621,19 +620,6 @@ class ForwardGradGraphTests(tf.test.TestCase):
       h = tf.nn.conv2d(x, w, [1, 1, 1, 1], "SAME")
       h = tf.nn.max_pool(h, [1, 3, 3, 1], [1, 2, 2, 1], "SAME")
       h = tf.nn.relu(h)
-
-      # x = tf.constant(rnd.uniform(-1.0, 1.0, [2, 25]), dtype=dtype, name="x")
-      # v = tf.constant(rnd.uniform(-1.0, 1.0, [25, 3]), dtype=dtype, name="v")
-      # w = tf.constant(rnd.uniform(-1.0, 1.0, [25, 3]), dtype=dtype, name="w")
-      # h = tf.matmul(x, w)
-      # h = tf.nn.relu(h)
-
-      # y = h
-      # log.error(y.get_shape())
-      # r = tf.constant(
-      #     rnd.uniform(-1.0, 1.0, [int(ss) for ss in y.get_shape()]),
-      #     dtype=dtype,
-      #     name="r")
 
       # Second convolution.
       v_ = tf.constant(

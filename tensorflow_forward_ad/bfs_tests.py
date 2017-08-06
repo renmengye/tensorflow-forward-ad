@@ -3,10 +3,9 @@ Basic tests of BFS.
 
 Author: Mengye Ren (mren@cs.toronto.edu)
 """
-
 import numpy as np
 import unittest
-# from bfs import bfs
+
 from tensorflow_forward_ad.cbfs import bfs
 
 

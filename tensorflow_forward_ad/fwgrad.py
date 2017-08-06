@@ -36,9 +36,9 @@ import numpy as np
 import tensorflow as tf
 
 from tensorflow.python.ops import gen_nn_ops
+from tensorflow_forward_ad import logger
+from tensorflow_forward_ad import maxpool_gradgrad
 from tensorflow_forward_ad.graph import get_path_cover_str_list_list
-
-import logger
 
 log = logger.get()
 
@@ -390,7 +390,8 @@ def MaxPool_FwGrad(op,
   y_zero = tf.zeros_like(y, dtype=argmax.dtype)
   x_shape = tf.cast(tf.shape(x), argmax.dtype)
   batch_dim = tf.reshape(
-      tf.range(x_shape[0], dtype=argmax.dtype), [-1, 1, 1, 1])
+      tf.range(
+          x_shape[0], dtype=argmax.dtype), [-1, 1, 1, 1])
   nelem = tf.reduce_prod(x_shape[1:])
   batch_dim *= nelem
   batch_dim += y_zero
@@ -712,7 +713,9 @@ def Softmax_FwGrad(op, dx, _op_table=None, _grad_table=None):
     return None
   return tf.subtract(
       tf.multiply(y, dx),
-      tf.multiply(y, tf.reduce_sum(tf.multiply(dx, y), [1], keep_dims=True)))
+      tf.multiply(
+          y, tf.reduce_sum(
+              tf.multiply(dx, y), [1], keep_dims=True)))
 
 
 @RegisterFwGrad("Log", elemwise=True)
@@ -737,7 +740,9 @@ def SparseSoftmaxCrossEntropyWithLogits_FwGrad(op,
   y = tf.nn.softmax(x)
   grad_grad = tf.subtract(
       tf.multiply(y, dx),
-      tf.multiply(y, tf.reduce_sum(tf.multiply(dx, y), [1], keep_dims=True)))
+      tf.multiply(
+          y, tf.reduce_sum(
+              tf.multiply(dx, y), [1], keep_dims=True)))
   return tf.reduce_sum(tf.multiply(grad, dx), [1]), grad_grad
 
 
@@ -922,6 +927,18 @@ def store_results(op, grads, grad_table):
 ###############################################################################
 # Main forward gradient function. Entry point.
 ###############################################################################
+def forward_gradients_v2(ys, xs, grad_xs=None, gate_gradients=False):
+  """Forward-mode pushforward analogous to the pullback defined by tf.gradients.
+  With tf.gradients, grad_ys is the vector being pulled back, and here d_xs is
+  the vector being pushed forward."""
+  if type(ys) == list:
+    v = [tf.ones_like(yy) for yy in ys]
+  else:
+    v = tf.ones_like(ys)  # dummy variable
+  g = tf.gradients(ys, xs, grad_ys=v)
+  return tf.gradients(g, v, grad_ys=grad_xs)
+
+
 def forward_gradients(ys,
                       xs,
                       grad_xs=None,

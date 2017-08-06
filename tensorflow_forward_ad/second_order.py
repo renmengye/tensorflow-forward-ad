@@ -6,10 +6,9 @@ automatic differentiation) in TensorFlow.
 2) Fisher
 3) Gauss-Newton
 """
-import logger
-
 import tensorflow as tf
 
+from tensorflow_forward_ad import logger
 from tensorflow_forward_ad.fwgrad import forward_gradients
 
 log = logger.get()
