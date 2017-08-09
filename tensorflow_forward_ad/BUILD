@@ -5,6 +5,12 @@ pyx_library(
   srcs = ["cbfs.pyx"],
 )
 
+py_library(
+  name = "logger",
+  srcs = ["logger.py"],
+  deps = [],
+)
+
 py_test(
   name = "bfs_tests",
   srcs = ["bfs_tests.py"],
@@ -18,9 +24,21 @@ py_library(
 )
 
 py_library(
+  name = "maxpool_gradgrad",
+  srcs = ["maxpool_gradgrad.py"],
+  deps = [],
+)
+
+py_test(
+  name = "maxpool_gradgrad_tests",
+  srcs = ["maxpool_gradgrad_tests.py"],
+  deps = [":maxpool_gradgrad"],
+)
+
+py_library(
   name = "fwgrad",
-  srcs = ["fwgrad.py", "maxpool_gradgrad.py"],
-  deps = [":graph"],
+  srcs = ["fwgrad.py"],
+  deps = [":logger", ":graph", ":maxpool_gradgrad"],
 )
 
 py_test(
