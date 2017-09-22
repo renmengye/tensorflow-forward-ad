@@ -598,9 +598,9 @@ def Pow_FwGrad(op, dx, dy, _op_table=None, _grad_table=None):
   elif dx is not None and dy is None:
     return y * x**(y - 1) * dx
   elif dy is not None and dx is None:
-    return x**y * dy
+    return x**y * dy * tf.log(x)
   else:
-    return y * x**(y - 1) * dx + x**y * dy
+    return y * x**(y - 1) * dx + x**y * dy * tf.log(x)
 
 
 @RegisterFwGrad("Identity", elemwise=True)
