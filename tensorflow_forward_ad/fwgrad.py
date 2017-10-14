@@ -568,7 +568,7 @@ def Div_FwGrad(op, dx, dy, _op_table=None, _grad_table=None):
   elif dx is not None and dy is None:
     return tf.divide(dx, y)
   elif dy is not None and dx is None:
-    return tf.divide(x * dy, y**2)
+    return -tf.divide(x * dy, y**2)
   else:
     return tf.divide(y * dx - x * dy, y**2)
 
