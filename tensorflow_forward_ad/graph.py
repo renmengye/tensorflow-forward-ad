@@ -47,7 +47,7 @@ def get_path_cover_multi_src(adj, src_list, dst, bfs_cache=None):
     if src >= num_nodes or dst >= num_nodes:
       raise Exception("Node index must be smaller than number of nodes.")
     if not bfs(adj, src, dst, cache=bfs_cache):
-      log.error("Source is not connected to destination.")
+      log.warning("Source is not connected to destination.")
   cover.extend(src_list)
   start = min(src_list) + 1
   for idx in range(start, dst):
