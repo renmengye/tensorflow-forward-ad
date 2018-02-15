@@ -7,7 +7,6 @@ tensorflow_forward_ad/__init__.py
 tensorflow_forward_ad/bfs.py
 tensorflow_forward_ad/bfs_tests.py
 tensorflow_forward_ad/cbfs.c
-tensorflow_forward_ad/cbfs.pyx
 tensorflow_forward_ad/fwgrad.py
 tensorflow_forward_ad/fwgrad_tests.py
 tensorflow_forward_ad/graph.py
