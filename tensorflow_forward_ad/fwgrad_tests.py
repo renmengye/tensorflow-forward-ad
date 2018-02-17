@@ -134,6 +134,18 @@ class Square_FwGradTests(BasicFwGradTests):
       self.assert_bw_fw(sess, x, y, rnd=rnd)
 
 
+class Sqrt_FwGradTests(BasicFwGradTests):
+
+  def test_basic(self):
+    with tf.Graph().as_default(), self.test_session() as sess:
+      rnd = np.random.RandomState(0)
+      dtype = tf.float32
+      x_shape = [18, 12]
+      x = tf.constant(rnd.uniform(0.0, 1.0, x_shape), dtype=dtype, name="x")
+      y = tf.sqrt(x)
+      self.assert_bw_fw(sess, x, y, rnd=rnd)
+
+
 class Relu_FwGradTests(BasicFwGradTests):
 
   def test_basic(self):

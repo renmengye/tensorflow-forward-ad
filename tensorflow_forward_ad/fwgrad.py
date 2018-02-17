@@ -390,8 +390,7 @@ def MaxPool_FwGrad(op,
   y_zero = tf.zeros_like(y, dtype=argmax.dtype)
   x_shape = tf.cast(tf.shape(x), argmax.dtype)
   batch_dim = tf.reshape(
-      tf.range(
-          x_shape[0], dtype=argmax.dtype), [-1, 1, 1, 1])
+      tf.range(x_shape[0], dtype=argmax.dtype), [-1, 1, 1, 1])
   nelem = tf.reduce_prod(x_shape[1:])
   batch_dim *= nelem
   batch_dim += y_zero
@@ -589,6 +588,14 @@ def Square_FwGrad(op, dx, _op_table=None, _grad_table=None):
   return tf.multiply(tf.multiply(tf.constant(2.0, x.dtype), x), dx)
 
 
+@RegisterFwGrad("Sqrt", elemwise=True)
+def Sqrt_FwGrad(op, dx, _op_table=None, _grad_table=None):
+  y = op.outputs[0]
+  if dx is None:
+    return None
+  return tf.div(0.5 * dx, y)
+
+
 @RegisterFwGrad("Pow", elemwise=True)
 def Pow_FwGrad(op, dx, dy, _op_table=None, _grad_table=None):
   x = op.inputs[0]
@@ -713,9 +720,7 @@ def Softmax_FwGrad(op, dx, _op_table=None, _grad_table=None):
     return None
   return tf.subtract(
       tf.multiply(y, dx),
-      tf.multiply(
-          y, tf.reduce_sum(
-              tf.multiply(dx, y), [1], keep_dims=True)))
+      tf.multiply(y, tf.reduce_sum(tf.multiply(dx, y), [1], keep_dims=True)))
 
 
 @RegisterFwGrad("Log", elemwise=True)
@@ -740,9 +745,7 @@ def SparseSoftmaxCrossEntropyWithLogits_FwGrad(op,
   y = tf.nn.softmax(x)
   grad_grad = tf.subtract(
       tf.multiply(y, dx),
-      tf.multiply(
-          y, tf.reduce_sum(
-              tf.multiply(dx, y), [1], keep_dims=True)))
+      tf.multiply(y, tf.reduce_sum(tf.multiply(dx, y), [1], keep_dims=True)))
   return tf.reduce_sum(tf.multiply(grad, dx), [1]), grad_grad
 
 
