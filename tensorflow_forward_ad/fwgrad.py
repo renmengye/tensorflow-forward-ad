@@ -593,8 +593,8 @@ def Sqrt_FwGrad(op, dx, _op_table=None, _grad_table=None):
   y = op.outputs[0]
   if dx is None:
     return None
-  return tf.div(0.5 * dx, y + tf.to_float(tf.equal(y, 0.0))) * tf.to_float(
-      tf.greater(y, 0.0))
+  return tf.div(0.5 * dx, y + tf.cast(tf.equal(y, 0.0), y.dtype)) * tf.cast(
+      tf.greater(y, 0.0), y.dtype)
 
 
 @RegisterFwGrad("Pow", elemwise=True)
