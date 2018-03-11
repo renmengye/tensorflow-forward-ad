@@ -588,6 +588,15 @@ def Square_FwGrad(op, dx, _op_table=None, _grad_table=None):
   return tf.multiply(tf.multiply(tf.constant(2.0, x.dtype), x), dx)
 
 
+@RegisterFwGrad("Sqrt", elemwise=True)
+def Sqrt_FwGrad(op, dx, _op_table=None, _grad_table=None):
+  y = op.outputs[0]
+  if dx is None:
+    return None
+  return tf.div(0.5 * dx, y + tf.cast(tf.equal(y, 0.0), y.dtype)) * tf.cast(
+      tf.greater(y, 0.0), y.dtype)
+
+
 @RegisterFwGrad("Pow", elemwise=True)
 def Pow_FwGrad(op, dx, dy, _op_table=None, _grad_table=None):
   x = op.inputs[0]
