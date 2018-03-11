@@ -214,11 +214,11 @@ class TestSecondOrderFwGrad(tf.test.TestCase):
 
         gv_fw_val = sess.run(gv_fw)
         fv_fw_val = sess.run(fv_fw)
-        np.testing.assert_allclose(gv_fw_val, fv_fw_val, rtol=1e-5)
+        np.testing.assert_allclose(gv_fw_val, fv_fw_val, rtol=1e-5, atol=1e-5)
 
         fv_fw_y_val = sess.run(fv_fw_y)
         fv_bk_val = sess.run(fv_bk)
-        np.testing.assert_allclose(fv_fw_y_val, fv_bk_val, rtol=1e-5)
+        np.testing.assert_allclose(fv_fw_y_val, fv_bk_val, rtol=1e-5, atol=1e-5)
 
   def test_gauss_newton_output_quadratic(self):
     rnd = np.random.RandomState(0)

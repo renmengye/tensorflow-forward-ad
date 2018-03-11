@@ -402,6 +402,35 @@ class Pack_FwGradTests(BasicFwGradTests):
       self.assert_bw_fw(sess, x, y, rnd=rnd)
 
 
+class Concat_FwGradTests(BasicFwGradTests):
+
+  def test_basic(self):
+    with tf.Graph().as_default(), self.test_session() as sess:
+      rnd = np.random.RandomState(0)
+      x = self.get_random_tensor([18, 12], rnd=rnd)
+      x2 = self.get_random_tensor([18, 12], rnd=rnd)
+      for ax in [0, 1]:
+        if tf.__version__.startswith("0"):
+          y = tf.concat(ax, [x, x2])
+        else:
+          y = tf.concat([x, x2], axis=ax)
+      self.assert_bw_fw(sess, x, y, rnd=rnd)
+
+
+class Pack_FwGradTests(BasicFwGradTests):
+
+  def test_basic(self):
+    with tf.Graph().as_default(), self.test_session() as sess:
+      rnd = np.random.RandomState(0)
+      x = self.get_random_tensor([18, 12], rnd=rnd)
+      x2 = self.get_random_tensor([18, 12], rnd=rnd)
+      if tf.__version__.startswith("0"):
+        y = tf.pack([x, x2])
+      else:
+        y = tf.stack([x, x2])
+      self.assert_bw_fw(sess, x, y, rnd=rnd)
+
+
 class Reshape_FwGradTests(BasicFwGradTests):
 
   def test_basic(self):
