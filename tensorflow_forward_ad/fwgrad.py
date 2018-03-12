@@ -494,6 +494,40 @@ def ReluGrad_FwGrad(op, dx, dy, _op_table=None, _grad_table=None):
   return tf.multiply(dx, tf.cast(tf.greater(y, 0.0), dx.dtype))
 
 
+@RegisterFwGrad("Maximum", elemwise=True)
+def Maximum_FwGrad(op, dx, dy, _op_table=None, _grad_table=None):
+  if dx is None and dy is None:
+    return None
+  else:
+    if dx is None:
+      x = op.inputs[0]
+      dx = tf.zeros_like(x)
+    if dy is None:
+      y = op.inputs[1]
+      dy = tf.zeros_like(y)
+  x = op.inputs[0]
+  y = op.inputs[1]
+  mask = tf.cast(tf.greater(x, y), x.dtype)
+  return tf.add(tf.multiply(dx, mask), tf.multiply(dy, 1.0 - mask))
+
+
+@RegisterFwGrad("Minimum", elemwise=True)
+def Minimum_FwGrad(op, dx, dy, _op_table=None, _grad_table=None):
+  if dx is None and dy is None:
+    return None
+  else:
+    if dx is None:
+      x = op.inputs[0]
+      dx = tf.zeros_like(x)
+    if dy is None:
+      y = op.inputs[1]
+      dy = tf.zeros_like(y)
+  x = op.inputs[0]
+  y = op.inputs[1]
+  mask = tf.cast(tf.less(x, y), x.dtype)
+  return tf.add(tf.multiply(dx, mask), tf.multiply(dy, 1.0 - mask))
+
+
 @RegisterFwGrad("Add", elemwise=True)
 def Add_FwGrad(op, dx, dy, _op_table=None, _grad_table=None):
   if dx is None and dy is None:

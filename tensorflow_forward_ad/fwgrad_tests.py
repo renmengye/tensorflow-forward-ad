@@ -168,6 +168,30 @@ class ReluGrad_FwGradTests(BasicFwGradTests):
       self.assert_bw_fw(sess, x, y, rnd=rnd)
 
 
+class Maximum_FwGradTests(BasicFwGradTests):
+
+  def test_basic(self):
+    with tf.Graph().as_default(), self.test_session() as sess:
+      rnd = np.random.RandomState(0)
+      x = self.get_random_tensor([18, 12], rnd=rnd)
+      x2 = self.get_random_tensor([18, 12], rnd=rnd)
+      y = tf.maximum(x, x2)
+      self.assert_bw_fw(sess, x, y, rnd=rnd)
+      self.assert_bw_fw(sess, x2, y, rnd=rnd)
+
+
+class Minimum_FwGradTests(BasicFwGradTests):
+
+  def test_basic(self):
+    with tf.Graph().as_default(), self.test_session() as sess:
+      rnd = np.random.RandomState(0)
+      x = self.get_random_tensor([18, 12], rnd=rnd)
+      x2 = self.get_random_tensor([18, 12], rnd=rnd)
+      y = tf.minimum(x, x2)
+      self.assert_bw_fw(sess, x, y, rnd=rnd)
+      self.assert_bw_fw(sess, x2, y, rnd=rnd)
+
+
 class Add_FwGradTests(BasicFwGradTests):
 
   def test_basic(self):
@@ -177,6 +201,7 @@ class Add_FwGradTests(BasicFwGradTests):
       x2 = self.get_random_tensor([18, 12], rnd=rnd)
       y = x + x2
       self.assert_bw_fw(sess, x, y, rnd=rnd)
+      self.assert_bw_fw(sess, x2, y, rnd=rnd)
 
 
 class Sub_FwGradTests(BasicFwGradTests):
@@ -188,6 +213,7 @@ class Sub_FwGradTests(BasicFwGradTests):
       x2 = self.get_random_tensor([18, 12], rnd=rnd)
       y = x - x2
       self.assert_bw_fw(sess, x, y, rnd=rnd)
+      self.assert_bw_fw(sess, x2, y, rnd=rnd)
 
 
 class Neg_FwGradTests(BasicFwGradTests):
@@ -209,6 +235,7 @@ class AddN_FwGradTests(BasicFwGradTests):
       x2 = self.get_random_tensor([18, 12], rnd=rnd)
       y = tf.add_n([x, x2])
       self.assert_bw_fw(sess, x, y, rnd=rnd)
+      self.assert_bw_fw(sess, x2, y, rnd=rnd)
 
 
 class Mul_FwGradTests(BasicFwGradTests):
@@ -220,6 +247,7 @@ class Mul_FwGradTests(BasicFwGradTests):
       x2 = self.get_random_tensor([18, 12], rnd=rnd)
       y = x * x2
       self.assert_bw_fw(sess, x, y, rnd=rnd)
+      self.assert_bw_fw(sess, x2, y, rnd=rnd)
 
 
 class Div_FwGradTests(BasicFwGradTests):
@@ -231,6 +259,7 @@ class Div_FwGradTests(BasicFwGradTests):
       x2 = self.get_random_tensor([18, 12], rnd=rnd)
       y = x / x2
       self.assert_bw_fw(sess, x, y, rnd=rnd)
+      self.assert_bw_fw(sess, x2, y, rnd=rnd)
 
 
 class Reciprocal_FwGradTests(BasicFwGradTests):
@@ -252,6 +281,7 @@ class Pow_FwGradTests(BasicFwGradTests):
       x2 = self.get_random_tensor([18, 12], rnd=rnd)
       y = tf.pow(x, x2)
       self.assert_bw_fw(sess, x, y, rnd=rnd)
+      self.assert_bw_fw(sess, x2, y, rnd=rnd)
 
 
 class Identity_FwGradTests(BasicFwGradTests):
