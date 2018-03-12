@@ -820,8 +820,10 @@ def Concat_FwGrad(*args, **kwargs):
 def Pack_FwGrad(*args, **kwargs):
   dx = args[1:]
   axis = kwargs["axis"]
+  op = args[0]
+  print(op)
+  print(args)
   if all(map(lambda x: x is None, dx)):
-    log.error("hey")
     return None
   else:
     ### Here we need to fill in zeros.
